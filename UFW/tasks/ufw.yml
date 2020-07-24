@@ -1,0 +1,43 @@
+---
+- name: Install UFW
+  hosts: {input_host_name_here}
+  become: true
+
+  tasks:
+  - name: apt-get update
+    apt: update_cache=yes force_apt_get=yes
+
+  - name: apt-get upgrade
+    apt: upgrade=yes force_apt_get=yes
+
+  - name: apt-get dist-upgrade
+    apt: upgrade=dist force_apt_get=yes
+
+  - name: apt-get auto-remove
+    apt: autoremove=yes force_apt_get=yes
+
+  - name: apt-get purge
+    apt: purge=yes force_apt_get=yes
+
+  - name: Install UFW
+    apt: name=ufw state=latest
+
+  - name: Install Fail2Ban
+    apt: name=fail2ban state=latest
+
+  - ufw:
+      rule: allow
+      port: "22"
+      proto: tcp
+
+  - name: Reject all, and allow UFW
+    ufw:
+      state: enabled
+      policy: reject
+      logging: "on"
+
+  - name: Allowing fail2ban
+    service:
+      name: fail2ban
+      state: started
+      enabled: true
