@@ -436,7 +436,7 @@ net.ipv4.tcp_congestion_control = hybla' \
     function install-bbr() {
         if [ "$INSTALL_BBR" == "" ]; then
             # shellcheck disable=SC2034
-            read -rp "Do You Want To Install TCP Bbr (y/n): " -e -i y INSTALL_BBR
+            read -rp "Do You Want To Install TCP bbr (y/n): " -e -i y INSTALL_BBR
         fi
         if [ "$INSTALL_BBR" = "y" ]; then
             # Run the systemctl install command
@@ -498,9 +498,9 @@ net.ipv4.tcp_congestion_control = hybla' \
     function v2ray-install() {
         CHECK_ARCHITECTURE=$(dpkg --print-architecture)
         # shellcheck disable=SC2086
-        FILE_NAME=$(v2ray-plugin-linux-$CHECK_ARCHITECTURE-v1.3.0.tar.gz)
+        FILE_NAME=$(v2ray-plugin-linux-$CHECK_ARCHITECTURE-v1.3.1.tar.gz)
         # shellcheck disable=SC2086
-        curl https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.3.0/$FILE_NAME --create-dirs -o /etc/shadowsocks-libev/$FILE_NAME
+        curl https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.3.1/$FILE_NAME --create-dirs -o /etc/shadowsocks-libev/$FILE_NAME
         # shellcheck disable=SC2086
         tar xvzf /etc/shadowsocks-libev/$FILE_NAME
         # shellcheck disable=SC2086
